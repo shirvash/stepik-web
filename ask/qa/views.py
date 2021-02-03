@@ -16,7 +16,8 @@ def logout(request):
         return HttpResponseRedirect(request.GET.get('next', '/'))
             
     raise Http404
-    
+
+"""
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -146,3 +147,4 @@ def home(request):
                 'paginator': paginator,
                 'page': page,
         })
+"""
