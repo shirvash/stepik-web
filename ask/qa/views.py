@@ -9,7 +9,7 @@ from django.contrib.auth import  logout as logout_
 
 def test(request, *args, **kwargs):
         return HttpResponse('OK')
-    
+"""
 def logout(request):
     if request.method == 'POST':     
         logout_(request)
@@ -17,7 +17,8 @@ def logout(request):
             
     raise Http404
 
-"""
+
+
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
