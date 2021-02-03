@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo pip3 uninstall -y django 
-sudo pip3 install django==1.9.4
+#sudo pip3 uninstall -y django 
+#sudo pip3 install django==1.9.4
 
 
 sudo service mysql restart
