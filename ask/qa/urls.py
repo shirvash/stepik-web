@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.urls import path
 
 urlpatterns = [
-    pathl(r'^login/.*$', 'qa.views.login', name='login'),
+    path(r'^login/.*$', 'qa.views.login', name='login'),
     path(r'^signup/.*$', 'qa.views.signup', name='signup'),
     path(r'^question/(?P<id>\d+)/.*$', 'qa.views.question', name='question'),
     path(r'^ask/.*$', 'qa.views.ask', name='ask'),
