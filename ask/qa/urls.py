@@ -1,14 +1,15 @@
 from django.conf.urls import include, url
 
+from django.urls import path
+
 urlpatterns = [
-    '', 
-    url(r'^login/.*$', 'qa.views.login', name='login'),
-    url(r'^signup/.*$', 'qa.views.signup', name='signup'),
-    url(r'^question/(?P<id>\d+)/.*$', 'qa.views.question', name='question'),
-    url(r'^ask/.*$', 'qa.views.ask', name='ask'),
-    url(r'^answer/.*$', 'qa.views.answer', name='answer'),
-    url(r'^popular/.*$', 'qa.views.popular', name='popular'),
-    url(r'^new/.*$', 'qa.views.new', name='new'),
-    url(r'^logout/.*$', 'qa.views.logout', name='logout'),
-    url(r'^$', 'qa.views.home', name='home')
+    pathl(r'^login/.*$', 'qa.views.login', name='login'),
+    path(r'^signup/.*$', 'qa.views.signup', name='signup'),
+    path(r'^question/(?P<id>\d+)/.*$', 'qa.views.question', name='question'),
+    path(r'^ask/.*$', 'qa.views.ask', name='ask'),
+    path(r'^answer/.*$', 'qa.views.answer', name='answer'),
+    path(r'^popular/.*$', 'qa.views.popular', name='popular'),
+    path(r'^new/.*$', 'qa.views.new', name='new'),
+    path(r'^logout/.*$', 'qa.views.logout', name='logout'),
+    path(r'^$', 'qa.views.home', name='home')
 ]
