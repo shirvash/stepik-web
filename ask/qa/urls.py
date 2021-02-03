@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-urlpatterns = [
+urlpatterns = patterns(
     '', 
     url(r'^login/.*$', 'qa.views.login', name='login'),
     url(r'^signup/.*$', 'qa.views.signup', name='signup'),
@@ -11,4 +11,4 @@ urlpatterns = [
     url(r'^new/.*$', 'qa.views.new', name='new'),
     url(r'^logout/.*$', 'qa.views.logout', name='logout'),
     url(r'^$', 'qa.views.home', name='home')
-              ]
+)
