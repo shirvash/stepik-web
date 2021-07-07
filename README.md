@@ -1,4 +1,4 @@
-<h1 align="center">Django project for web-technology course at Stepik.org</h1>
+<h2>Django project for web-technology course at Stepik.org</h2>
 
-https://stepik.org/course/154/info
+<a href="https://stepik.org/course/154/info">Web-technology course</a>
 
