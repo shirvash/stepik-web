@@ -5,13 +5,12 @@
 ## Локальная установка 
 1. Клонируем репозиторий
 ```
-cd git
-https://github.com/shirvash/Stepik_web.git
+git clone https://github.com/shirvash/Stepik_web.git
 cd Stepik_web
 ```
 2. Устанавливаем зависимости
 ```
-python -m venv env
+python3 -m venv env
 . env/bin/activate
 pip install -r requirements.txt
 ```
