@@ -15,6 +15,9 @@ sudo ln -sf /home/box/web/etc/gunicorn-ask.conf /etc/gunicorn.d/gunicorn-ask.con
 
 
 python3 /home/box/web/ask/manage.py makemigrations
+python3 /home/box/web/ask/manage.py makemigrations qa
 python3 /home/box/web/ask/manage.py migrate
+
+python3  /home/box/web/ask/manage.py loadtestdata qa.Question:20 qa.Answer:50
 
 bash restartServers.sh
