@@ -2,3 +2,11 @@
 __pycache__
 /ask/myproject
 /myproject
+*__pycache__
+db.sqlite3
+/static
+/media
+.idea/*
+venv/*
+.python-version
+.env*
