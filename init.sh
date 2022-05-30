@@ -1,27 +1,20 @@
 #!/bin/bash
 
-sudo pip3 uninstall -y django
-sudo pip3 install -r requirements.txt
+#sudo rm -f /etc/nginx/sites-enabled/test.conf
+#sudo rm -f /etc/nginx/sites-enabled/default
+#sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
+#sudo rm /etc/gunicorn.d/hello.py
+#sudo rm /etc/gunicorn.d/ask.py
+#sudo ln -s /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/hello.py
+#sudo ln -s /home/box/web/etc/ask.py /etc/gunicorn.d/ask.py
 
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
 
-sudo service mysql restart
+sudo ln -sf /home/box/web/etc/gunicorn-wsgi.conf /etc/gunicorn.d/test-wsgi
+sudo ln -sf /home/box/web/etc/gunicorn-django.conf /etc/gunicorn.d/test-django
 
-
-sudo mysql -uroot -e "CREATE DATABASE IF NOT EXISTS myproject CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-
-
-sudo rm -f /etc/nginx/sites-enabled/test.conf
-sudo rm -f /etc/nginx/sites-enabled/default
-sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
-
-
-sudo rm /etc/gunicorn.d/hello.py
-sudo rm /etc/gunicorn.d/ask.py
-sudo ln -s /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/hello.py
-sudo ln -s /home/box/web/etc/ask.py /etc/gunicorn.d/ask.py
-
-cd /home/box/web
-python3 ask/manage.py makemigrations
-python3 ask/manage.py migrate
+python3 /home/box/web/ask/manage.py makemigrations
+python3 /home/box/web/ask/manage.py migrate
 
 bash restartServers.sh
