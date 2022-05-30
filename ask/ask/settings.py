@@ -12,7 +12,7 @@ SECRET_KEY = 'votk&is9vw-u3&+7pep6rt9o1(h9mb)^z(9f4lo_m@tbaj3%77'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
