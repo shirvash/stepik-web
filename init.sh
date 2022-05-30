@@ -1,7 +1,6 @@
 #!/bin/bash
 
-sudo pip3 install --upgrade django
-sudo pip3 install --upgrade gunicorn
+sudo pip3 install -r requirements.txt
 
 sudo rm -f /etc/nginx/sites-enabled/test.conf
 sudo rm -f /etc/nginx/sites-enabled/default
