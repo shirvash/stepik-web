@@ -18,6 +18,6 @@ python3 /home/box/web/ask/manage.py makemigrations
 python3 /home/box/web/ask/manage.py makemigrations qa
 python3 /home/box/web/ask/manage.py migrate
 
-python3  /home/box/web/ask/manage.py loadtestdata qa.Question:20 qa.Answer:50
+python3  /home/box/web/ask/manage.py loaddata initial.json
 
 bash restartServers.sh
