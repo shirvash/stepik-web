@@ -4,29 +4,21 @@
 
 ## Локальная установка 
 1. Клонируем репозиторий
-```
-git clone https://github.com/shirvash/Stepik_web.git
-cd Stepik_web
-```
-2. Устанавливаем зависимости
-```
-python3 -m venv env
-. env/bin/activate
-pip install -r requirements.txt
-```
-3. Устанавливаем миграции и создаём пользователя 
-```
-python manage.py migrate
-# Создаём пользователя админа
-python manage.py createsuperuser
-username: admin
-password: ********
+```bash
+git clone https://github.com/shirvash/stepik-web.git
+mv stepik-web web
+cd web
 ```
 
-4. Запускаем приложение
-```
-python manage.py runserver
-# Админ http://127.0.0.1:8000/admin
+2. Создаем базу данных MySql 
+```bash
+source mysql.sh
 ```
 
-## Enjoy it!
+3. Запускаем bash-скрипт с правами администратора
+```bash
+chmod +x init.sh
+source init.sh
+```
+
+### Enjoy it!
