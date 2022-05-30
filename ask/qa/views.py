@@ -1,10 +1,11 @@
-﻿from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.core.paginator import Paginator, EmptyPage
-# from qa.models import Question, Answer
-# from qa.forms import AskForm, AnswerForm, SignupForm, LoginForm
-# from django.shortcuts import render
-# from django.core.urlresolvers import reverse
-# from django.contrib.auth import  logout as logout_
+﻿from django.core.paginator import Paginator, EmptyPage
+from django.http import HttpResponse, Http404
+# from .forms import AskForm, AnswerForm, SignupForm, LoginForm
+from django.shortcuts import render
+from django.urls import reverse
+
+from .models import Question
+
 
 def test(request, *args, **kwargs):
         return HttpResponse('OK')
@@ -133,25 +134,25 @@ def new(request, *args, **kwargs):
         return test(request, args, kwargs)
 
 def home(request):
-        # questions = Question.objects.order_by('-added_at')
-        # limit = 10
-        #
-        # try:
-        #     pagenum = int(request.GET.get('page', 1))
-        # except:
-        #     raise Http404
-        #
-        # paginator = Paginator(questions, limit)
-        # paginator.baseurl = reverse('home') + '?page='
-        #
-        # try:
-        #     page = paginator.page(pagenum)
-        # except EmptyPage:
-        #     page = paginator.page(paginator.num_pages)
-        #
-        # return render(request, 'main_page.html', {
-        #         'username': request.user.username,
-        #         'paginator': paginator,
-        #         'page': page,
-        # })
-        return HttpResponse('OK')
+        questions = Question.objects.order_by('-added_at')
+        limit = 10
+
+        try:
+            pagenum = int(request.GET.get('page', 1))
+        except:
+            raise Http404
+
+        paginator = Paginator(questions, limit)
+        paginator.baseurl = reverse('home') + '?page='
+
+        try:
+            page = paginator.page(pagenum)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+
+        return render(request, 'main_page.html', {
+                'username': request.user.username,
+                'paginator': paginator,
+                'page': page,
+        })
+
