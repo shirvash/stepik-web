@@ -1,15 +1,16 @@
-from django.conf.urls import include, url
-
 from django.urls import path
 
+from . import views
+
 urlpatterns = [
-    path(r'^login/.*$', 'qa.views.login', name='login'),
-    path(r'^signup/.*$', 'qa.views.signup', name='signup'),
-    path(r'^question/(?P<id>\d+)/.*$', 'qa.views.question', name='question'),
-    path(r'^ask/.*$', 'qa.views.ask', name='ask'),
-    path(r'^answer/.*$', 'qa.views.answer', name='answer'),
-    path(r'^popular/.*$', 'qa.views.popular', name='popular'),
-    path(r'^new/.*$', 'qa.views.new', name='new'),
-    path(r'^logout/.*$', 'qa.views.logout', name='logout'),
-    path(r'^$', 'qa.views.home', name='home')
+    path('', views.home, name='home'),
+    path('login/', views.login, name='login'),
+    path('signup/', views.signup, name='signup'),
+    path('question/<id>', views.question, name='question'),
+    path('ask/', views.ask, name='ask'),
+    path('answer/', views.answer, name='answer'),
+    path('popular/', views.popular, name='popular'),
+    path('new/', views.new, name='new'),
+    path('logout/', views.logout, name='logout'),
+
 ]
