@@ -1,0 +1,17 @@
+<br />
+<br />
+<p><b>Title:</b> {{ question.title }} </p>
+<p><b> Content:</b> {{ question.text }} </p>
+<p><b> Author:</b> {{ question.author }} </p>
+{{ question.added_ad }}
+<br />
+<br />
+<p><b> Answers:</b> </p>
+{%  for ans in answers %}
+	{{ ans.author }}: {{ ans.text }}
+	({{ ans.added_ad }})
+    <br />
+{% endfor %}
+<br />
+__________________________________________________________
+{% include 'answer.html' %}
