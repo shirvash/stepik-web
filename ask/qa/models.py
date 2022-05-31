@@ -17,7 +17,7 @@ class Question(models.Model):
     text = models.TextField()
     added_ad = models.DateTimeField(auto_now=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User, on_delete=models.deletion.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.deletion.CASCADE, blank=True, null=True)
     likes = models.ManyToManyField(User, related_name='for_likes', blank=True)
 
     def get_absolute_url(self):
@@ -34,4 +34,4 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.deletion.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.deletion.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.deletion.CASCADE, blank=True, null=True)

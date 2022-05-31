@@ -14,7 +14,7 @@ class AskForm(ModelForm):
         _title = self.cleaned_data['title']
         _text = self.cleaned_data['text']
         qu = Question(title=_title, text=_text)
-        qu.author_id = self._user
+        #qu.author_id = self._user
         qu.save()
         return qu
 
@@ -38,36 +38,36 @@ class AnswerForm(ModelForm):
         _text = self.cleaned_data['text']
         _question = self.cleaned_data['question']
         ask = Answer(text=_text, question=_question)
-        ask.author_id = self._user
+        #ask.author_id = self._user
         ask.save()
         return ask
 
 
-class LoginForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'password']
-        widgets = {'password': forms.PasswordInput()}
+#class LoginForm(ModelForm):
+    # class Meta:
+    #     model = User
+    #     fields = ['username', 'password']
+    #     widgets = {'password': forms.PasswordInput()}
+    #
+    # def clean(self):
+    #     username = self.cleaned_data['username']
+    #     password = self.cleaned_data['password']
+    #     try:
+    #         user = User.objects.get(username=username)
+    #     except User.DoesNotExist:
+    #         raise forms.ValidationError('wrong username or password')
+    #     else:
+    #         return user
 
-    def clean(self):
-        username = self.cleaned_data['username']
-        password = self.cleaned_data['password']
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            raise forms.ValidationError('wrong username or password')
-        else:
-            return user
 
-
-class SignupForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
-
-    def save(self):
-        _un = self.cleaned_data['username']
-        _pw = self.cleaned_data['password']
-        _em = self.cleaned_data['email']
-        user = User.objects.create_user(_un, _em, _pw)
-        return user
+# class SignupForm(ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', 'password']
+#
+#     def save(self):
+#         _un = self.cleaned_data['username']
+#         _pw = self.cleaned_data['password']
+#         _em = self.cleaned_data['email']
+#         user = User.objects.create_user(_un, _em, _pw)
+#         return user
