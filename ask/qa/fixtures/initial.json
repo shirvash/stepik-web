@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "username": "Pupkin",
-      "password": "oolololo"
+      "password": "qwerty"
     }
   },
   {
@@ -31,13 +31,30 @@
       "password": "qwerty"
     }
   },
+    {
+    "model": "qa.Question",
+    "pk": 0,
+    "fields": {
+      "title": "Test_question?",
+      "text": "Hello, World!",
+      "added_at": "2016-03-11T12:00:00.000Z",
+      "rating": 5,
+      "author": 1,
+      "likes": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
   {
     "model": "qa.Question",
     "pk": 1,
     "fields": {
-      "title": "first question",
-      "text": "There is content of first question, wtf?",
-      "added_ad": "2016-03-12T12:00:00.000Z",
+      "title": "What a nice weather?",
+      "text": "Sunny",
+      "added_at": "2016-03-12T12:00:00.000Z",
       "rating": 3,
       "author": 1,
       "likes": [
@@ -53,7 +70,7 @@
     "fields": {
       "title": "Why doesn't McDonald's sell hotdogs?",
       "text": "There is content question, wtf?",
-      "added_ad": "2016-03-12T12:10:00.000Z",
+      "added_at": "2016-03-12T12:10:00.000Z",
       "rating": 1,
       "author": 2,
       "likes": []
@@ -65,7 +82,7 @@
     "fields": {
       "title": "Are eyebrows considered facial hair?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-03-12T13:00:00.000Z",
+      "added_at": "2016-03-12T13:00:00.000Z",
       "rating": 4,
       "author": 3,
       "likes": [
@@ -82,7 +99,7 @@
     "fields": {
       "title": "At a movie theater which arm rest is yours?",
       "text": "There is content of quiestion, wtf?",
-      "added_ad": "2016-03-12T13:10:00.000Z",
+      "added_at": "2016-03-12T13:10:00.000Z",
       "rating": 2,
       "author": 1,
       "likes": [
@@ -97,7 +114,7 @@
     "fields": {
       "title": "Do vegetarians eat animal crackers?",
       "text": "There is content of quiestion, wtf?",
-      "added_ad": "2016-03-12T13:11:00.000Z",
+      "added_at": "2016-03-12T13:11:00.000Z",
       "rating": 2,
       "author": 1,
       "likes": [
@@ -112,7 +129,7 @@
     "fields": {
       "title": "Why are there no 'B' batteries?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-03-12T13:20:00.000Z",
+      "added_at": "2016-03-12T13:20:00.000Z",
       "rating": 0,
       "author": 4,
       "likes": []
@@ -124,7 +141,7 @@
     "fields": {
       "title": "If a jogger runs at the speed of sound, can he still hear his iPod?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-03-14T10:00:00.000Z",
+      "added_at": "2016-03-14T10:00:00.000Z",
       "rating": 1,
       "author": 2,
       "likes": [
@@ -138,7 +155,7 @@
     "fields": {
       "title": "How do you handcuff a one-armed man?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-03-15T11:59:59.000Z",
+      "added_at": "2016-03-15T11:59:59.000Z",
       "rating": 3,
       "author": 1,
       "likes": [
@@ -154,7 +171,7 @@
     "fields": {
       "title": "When does it stop being partly cloudy and start being partly sunny?",
       "text": "There is content of quiestion, wtf?",
-      "added_ad": "2016-03-15T12:02:45.000Z",
+      "added_at": "2016-03-15T12:02:45.000Z",
       "rating": 3,
       "author": 3,
       "likes": [
@@ -170,7 +187,7 @@
     "fields": {
       "title": "If a kid refuses to sleep during nap time, are they guilty of resisting a rest?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-03-16T08:00:00.000Z",
+      "added_at": "2016-03-16T08:00:00.000Z",
       "rating": 2,
       "author": 2,
       "likes": [
@@ -185,7 +202,7 @@
     "fields": {
       "title": "Is it still illegal to park next to a fire hydrant, even if your car is on fire?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-04-01T11:21:32.000Z",
+      "added_at": "2016-04-01T11:21:32.000Z",
       "rating": 4,
       "author": 2,
       "likes": [
@@ -202,7 +219,7 @@
     "fields": {
       "title": "If a bunch of cats jump on top of each other, is it still called a dog pile?",
       "text": "There is content of first question, wtf?",
-      "added_ad": "2016-05-21T16:10:00.000Z",
+      "added_at": "2016-05-21T16:10:00.000Z",
       "rating": 1,
       "author": 4,
       "likes": [
@@ -216,7 +233,7 @@
     "fields": {
       "title": "If a mime is arrested, do they tell him he has a right to talk?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-06-15T21:10:00.000Z",
+      "added_at": "2016-06-15T21:10:00.000Z",
       "rating": 2,
       "author": 4,
       "likes": [
@@ -231,7 +248,7 @@
     "fields": {
       "title": "If vampires can't see their reflections, why is their hair always so neat?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-06-15T23:11:02.000Z",
+      "added_at": "2016-06-15T23:11:02.000Z",
       "rating": 3,
       "author": 2,
       "likes": [
@@ -247,7 +264,7 @@
     "fields": {
       "title": "Do they have the word \"dictionary\" in the dictionary?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-06-16T08:22:23.000Z",
+      "added_at": "2016-06-16T08:22:23.000Z",
       "rating": 0,
       "author": 1,
       "likes": []
@@ -259,7 +276,7 @@
     "fields": {
       "title": "What is a picture of a thousand words worth?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-06-20T15:56:43.000Z",
+      "added_at": "2016-06-20T15:56:43.000Z",
       "rating": 2,
       "author": 1,
       "likes": [
@@ -274,7 +291,7 @@
     "fields": {
       "title": "Why doesn't the fattest man in the world become a hockey goalie?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-06-21T11:23:56.000Z",
+      "added_at": "2016-06-21T11:23:56.000Z",
       "rating": 1,
       "author": 3,
       "likes": [
@@ -288,7 +305,7 @@
     "fields": {
       "title": "What do you do when you see an endangered animal that is eating an endangered plant?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-06-21T14:54:21.000Z",
+      "added_at": "2016-06-21T14:54:21.000Z",
       "rating": 0,
       "author": 1,
       "likes": []
@@ -300,7 +317,7 @@
     "fields": {
       "title": "If glassblowers inhale do they get a pane in the stomach?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-06-22T10:19:31.000Z",
+      "added_at": "2016-06-22T10:19:31.000Z",
       "rating": 3,
       "author": 4,
       "likes": [
@@ -316,7 +333,7 @@
     "fields": {
       "title": "Why aren't drapes double sided so it looks nice on the inside and outside of your home?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-07-01T00:01:00.000Z",
+      "added_at": "2016-07-01T00:01:00.000Z",
       "rating": 1,
       "author": 2,
       "likes": [
@@ -330,7 +347,7 @@
     "fields": {
       "title": "If money doesn't grow on trees then why do banks have branches?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-07-02T17:37:29.000Z",
+      "added_at": "2016-07-02T17:37:29.000Z",
       "rating": 3,
       "author": 4,
       "likes": [
@@ -346,7 +363,7 @@
     "fields": {
       "title": "Why does caregiver and caretaker mean the same thing?",
       "text": "There is content of question, wtf?",
-      "added_ad": "2016-07-23T19:14:43.000Z",
+      "added_at": "2016-07-23T19:14:43.000Z",
       "rating": 3,
       "author": 1,
       "likes": [

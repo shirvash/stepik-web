@@ -1,14 +1,13 @@
-﻿from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout as logout_
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, Http404
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response, redirect, render
-from django.views.decorators.http import require_GET
-
-from .forms import AskForm, AnswerForm
+﻿from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.core.paginator import Paginator
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from .models import Question, Answer
+from .forms import AnswerForm, AskForm
 
+
+# Create your views here.
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
@@ -18,104 +17,83 @@ def new(request, *args, **kwargs):
     return test(request, args, kwargs)
 
 
-@require_GET
-def home(request):
-    qu_list = Question.objects.order_by('-added_ad')
-
-    paginator = Paginator(qu_list, 10)
-    page = request.GET.get('page')
+def new_questions(request):
+    questions = Question.objects.new()
+    limit = request.GET.get('limit', 10)
     try:
-        questions = paginator.page(page)
-    except PageNotAnInteger:
-        questions = paginator.page(1)
-    except EmptyPage:
-        questions = paginator.page(paginator.num_pages)
+        page = request.GET.get('page', 1)
+    except ValueError:
+        raise Http404
+    paginator = Paginator(questions, limit)
+    paginator.baseurl = '/?page='
+    page = paginator.page(page)
+    return render(request, 'popular.html', {'questions': page.object_list, 'paginator': paginator, 'page': page})
 
-    return render_to_response('index.html', {'questions': questions})
 
-
-@require_GET
 def popular(request):
-    qu_list = Question.objects.order_by('-rating')
-
-    paginator = Paginator(qu_list, 10)
-    page = request.GET.get('page')
+    questions = Question.objects.popular()
+    limit = request.GET.get('limit', 10)
     try:
-        questions = paginator.page(page)
-    except PageNotAnInteger:
-        questions = paginator.page(1)
-    except EmptyPage:
-        questions = paginator.page(paginator.num_pages)
+        page = request.GET.get('page', 1)
+    except ValueError:
+        raise Http404
+    paginator = Paginator(questions, limit)
+    paginator.baseurl = '/popular/?page='
+    page = paginator.page(page)
+    return render(request, 'popular.html', {'questions': page.object_list, 'paginator': paginator, 'page': page})
 
-    return render_to_response('index.html', {'questions': questions})
 
-
-def question(request, qu_id):
-    qu = get_object_or_404(Question, pk=qu_id)
-    answers = Answer.objects.filter(question=qu)
-    form = AnswerForm(initial={'question': qu_id})
-    return render(request, 'question.html', {'question': qu, 'answers': answers, 'form': form})
+def question(request, id):
+    question = get_object_or_404(Question, pk=id)
+    answers = Answer.objects.filter(question=id)
+    user = request.user
+    if request.method == 'POST':
+        form = AnswerForm(user, request.POST, initial={'question': question.id})
+        if form.is_valid():
+            answer = form.save()
+    else:
+        form = AnswerForm(user, initial={'question': question.id})
+    return render(request, 'question.html', {'question': question, 'answers': answers, 'form': form})
 
 
 def ask(request):
     if request.method == 'POST':
-        form = AskForm(request.POST)
-        #form._user = request.user.id
+        user = request.user
+        form = AskForm(user, request.POST)
         if form.is_valid():
-            qu = form.save()
-            return redirect(qu.get_absolute_url(), qu.pk)
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
     else:
         form = AskForm()
     return render(request, 'ask.html', {'form': form})
 
 
-def answer(request):
-    if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        #form._user = request.user.id
-        if form.is_valid():
-            ask = form.save()
-            return redirect(ask.question.get_absolute_url(), ask.question.id)
-    else:
-        form = AnswerForm()
-    return render(request, 'answer.html', {'form': form})
-
-
 def signup(request):
-    return HttpResponse('OK')
-    # if request.method == 'POST':
-    #     form = SignupForm(request.POST)
-    #     if form.is_valid():
-    #         user = form.save()
-    #         us = authenticate(username=request.POST['username'], password=request.POST['password'])
-    #         login(request, us)
-    #         return redirect('/')
-    # else:
-    #     form = SignupForm()
-    # return render(request, 'signup.html', {'form': form})
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(username=request.POST['username'])
+            return render(request, 'signup.html', {'error': 'This name is busy'})
+        except User.DoesNotExist:
+            user = User.objects.create_user(username, email, password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+    else:
+        return render(request, 'signup.html')
 
 
-def logout(request):
-    return HttpResponse('OK')
-    # if request.method == 'POST':
-    #     logout_(request)
-    #     return HttpResponseRedirect(request.GET.get('next', '/'))
-    #
-    # raise Http404
-
-
-def login_(request):
-    return HttpResponse('OK')
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(request)
-#             if user != None:
-#                 resp = HttpResponseRedirect('/')  # Replace to request.next
-#                 return resp
-#     else:
-#         form = LoginForm()
-#
-#     return render(request, 'login.html', {
-#         'form': form,
-#     })
+def my_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid login or password'})
+    else:
+        return render(request, 'login.html')

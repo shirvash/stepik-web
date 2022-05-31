@@ -1,73 +1,46 @@
 from django import forms
-from django.forms import ModelForm
-from django.contrib.auth.models import User
-
 from .models import Question, Answer
+from django.shortcuts import get_object_or_404
 
+class AskForm(forms.Form):
+    title = forms.CharField(max_length=100)
+    text = forms.CharField(widget=forms.Textarea)
 
-class AskForm(ModelForm):
-    class Meta:
-        model = Question
-        fields = ['title', 'text']
+    def __init__(self, user="Max", *args, **kwargs):
+        self._user = user
+        super(AskForm, self).__init__(*args, **kwargs)
 
-    def save(self):
-        _title = self.cleaned_data['title']
-        _text = self.cleaned_data['text']
-        qu = Question(title=_title, text=_text)
-        #qu.author_id = self._user
-        qu.save()
-        return qu
-
-
-class AnswerForm(ModelForm):
-    class Meta:
-        model = Answer
-        fields = ['text', 'question']
-        widgets = {'question': forms.HiddenInput()}
-
-    def clean_question(self):
-        _qu = self.cleaned_data['question']
-        try:
-            qu = Question.objects.get(pk=_qu.id)
-        except:
-            raise forms.ValidationError('question does not exist')
-        else:
-            return qu
+    def clean(self):
+        cleaned_data = super(AskForm, self).clean()
+        title = self.cleaned_data['title']
+        text = self.cleaned_data['text']
+        if (not title) or (not text):
+            raise forms.ValidationError(u'message incorrect!')
+        return self.cleaned_data
 
     def save(self):
-        _text = self.cleaned_data['text']
-        _question = self.cleaned_data['question']
-        ask = Answer(text=_text, question=_question)
-        #ask.author_id = self._user
-        ask.save()
-        return ask
+        self.cleaned_data['author'] = self._user
+        question = Question(**self.cleaned_data)
+        question.save()
+        return question
 
+class AnswerForm(forms.Form):
+    text = forms.CharField(widget=forms.Textarea)
+    question = forms.IntegerField()
 
-#class LoginForm(ModelForm):
-    # class Meta:
-    #     model = User
-    #     fields = ['username', 'password']
-    #     widgets = {'password': forms.PasswordInput()}
-    #
-    # def clean(self):
-    #     username = self.cleaned_data['username']
-    #     password = self.cleaned_data['password']
-    #     try:
-    #         user = User.objects.get(username=username)
-    #     except User.DoesNotExist:
-    #         raise forms.ValidationError('wrong username or password')
-    #     else:
-    #         return user
+    def __init__(self, user='Max', *args, **kwargs):
+        self._user = user
+        super(AnswerForm, self).__init__(*args, **kwargs)
 
+    def clean(self):
+        text = self.cleaned_data['text']
+        if "spam" in text:
+            raise forms.ValidationError(u'message incorrect!')
+        return self.cleaned_data
 
-# class SignupForm(ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ['username', 'email', 'password']
-#
-#     def save(self):
-#         _un = self.cleaned_data['username']
-#         _pw = self.cleaned_data['password']
-#         _em = self.cleaned_data['email']
-#         user = User.objects.create_user(_un, _em, _pw)
-#         return user
+    def save(self):
+        self.cleaned_data['author'] = self._user
+        self.cleaned_data['question'] = get_object_or_404(Question, pk=self.cleaned_data['question'])
+        answer = Answer(**self.cleaned_data)
+        answer.save()
+        return answer
